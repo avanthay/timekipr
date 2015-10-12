@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}{{ 'timekipr.login'|trans }}{% endblock %}
+
+{% block body %}
+    <p class="alert alert-danger">Custom Login</p>
+
+    {# override default FOSUserBundle layout #}
+    {% block fos_user_content %}{% endblock %}
+
+
+{% endblock %}
+
