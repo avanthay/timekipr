@@ -12,6 +12,12 @@
 /web/bundles/
 
 
-# dave
+# ide
 .idea/
 *.iml
+
+# assetics
+/web/assetic/
+/web/css/
+/web/images/
+/web/js/
