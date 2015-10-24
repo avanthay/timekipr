@@ -23,14 +23,13 @@ security:
             security: false
 
         main:
-#            anonymous: ~
+            anonymous: ~
             pattern: ^/
             form_login:
                 provider: fos_userbundle
                 csrf_provider: security.csrf.token_manager
 
             logout: true
-            anonymous: true
             # activate different ways to authenticate
 
             # http_basic: ~
@@ -44,3 +43,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/, role: ROLE_USER }

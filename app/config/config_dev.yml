@@ -43,6 +43,9 @@ monolog:
 
 assetic:
     use_controller: true
+    filters:
+        uglifycss: ~
+        uglifyjs2: ~
 
 #swiftmailer:
 #    delivery_address: me@example.com

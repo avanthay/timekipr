@@ -42,43 +42,26 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ 'FOSUserBundle' ]
-    #java: /usr/bin/java
+    bundles:        [ 'FOSUserBundle', 'AppBundle' ]
     filters:
-        cssrewrite: ~
-        sass: ~
-        #closure:
-        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
-        #yui_css:
-        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+        cssrewrite:
+            apply_to: "\.css$"
+        sass:
+            apply_to: "\.sass$"
+        uglifyjs2:
+            bin: %kernel.root_dir%/Resources/node_modules/.bin/uglifyjs
+            apply_to: "\.js$"
+        uglifycss:
+            bin: %kernel.root_dir%/Resources/node_modules/.bin/uglifycss
+            apply_to: "\.css$"
+            #TODO check how to install autoprefixer
+#        autoprefixer:
+#            bin: %kernel.root_dir%/Resources/node_modules/.bin/postcss
+#            apply_to: "\.css$"
     assets:
         jquery:
             inputs:
                 - %kernel.root_dir%/../vendor/components/jquery/jquery.js
-        bootstrap_js:
-                inputs:
-                    - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/js/bootstrap.js
-        bootstrap_css:
-                inputs:
-                    - %kernel.root_dir%/../src/AppBundle/Resources/public/css/bootstrap-timekipr.css
-                    - %kernel.root_dir%/../src/AppBundle/Resources/public/css/bootstrap-theme-timekipr.css
-                filters: [cssrewrite]
-        bootstrap_glyphicons_ttf:
-            inputs:
-                - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf
-            output: "fonts/glyphicons-halflings-regular.ttf"
-        bootstrap_glyphicons_eot:
-            inputs:
-                - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/fonts/glyphicons-halflings-regular.eot
-            output: "fonts/glyphicons-halflings-regular.eot"
-        bootstrap_glyphicons_svg:
-            inputs:
-                - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/fonts/glyphicons-halflings-regular.svg
-            output: "fonts/glyphicons-halflings-regular.svg"
-        bootstrap_glyphicons_woff:
-            inputs:
-                - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/fonts/glyphicons-halflings-regular.woff
-            output: "fonts/glyphicons-halflings-regular.woff"
 
 # Doctrine Configuration
 doctrine:
