@@ -1,7 +1,17 @@
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,500,700,400italic,500italic,700italic)
+
+@import bootstrap-custom-variables
+@import bootstrap
+
 .tk-logo
   img
     max-width: 100%
-
-.tk-logo-big
   margin-top: 25px
   margin-bottom: 50px
+  h1
+    @media (min-width: $screen-sm-min)
+      font-size: $font-size-h1 * 2
+    color: $component-active-bg
+    .tk-text-reverse
+      color: $brand-primary
+      background-color: $component-active-bg

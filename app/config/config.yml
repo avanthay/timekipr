@@ -42,7 +42,6 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ 'FOSUserBundle', 'AppBundle' ]
     filters:
         cssrewrite:
             apply_to: "\.css$"
@@ -55,9 +54,7 @@ assetic:
             bin: %kernel.root_dir%/Resources/node_modules/.bin/uglifycss
             apply_to: "\.css$"
             #TODO check how to install autoprefixer
-#        autoprefixer:
-#            bin: %kernel.root_dir%/Resources/node_modules/.bin/postcss
-#            apply_to: "\.css$"
+
     assets:
         jquery:
             inputs:
