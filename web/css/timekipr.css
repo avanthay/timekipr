@@ -1,0 +1,23 @@
+.tk-logo {
+  margin-top: 25px; }
+  .tk-logo img {
+    width: 100%; }
+  .tk-logo .tk-logo-text {
+    color: #0a0a0a; }
+    .tk-logo .tk-logo-text .tk-text-reverse {
+      color: #dcc60d;
+      background-color: #0a0a0a; }
+
+.tk-logo-big .tk-logo {
+  margin-bottom: 50px; }
+  .tk-logo-big .tk-logo .tk-logo-text {
+    font-size: 36px; }
+    @media (min-width: 768px) {
+      .tk-logo-big .tk-logo .tk-logo-text {
+        font-size: 72px; } }
+
+.tk-logo-header .tk-logo img {
+  max-width: 60px; }
+
+.tk-header-title {
+  margin-top: 25px; }

@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <header class="row">
+        <div class="col-xs-4 col-sm-2 col-md-offset-2 col-md-2">
+            <a class="tk-logo-header" href="{{ path('homepage') }}">
+                {% include ':snippets:logo.html.twig' %}
+            </a>
+        </div>
+        <div class="col-xs-8 col-sm-10 col-md-6 tk-header-title">
+            <h1>{% spaceless %}
+                    {% block pageTitle %}
+                        timekipr
+                    {% endblock %}
+                {% endspaceless %}</h1>
+        </div>
+    </header>
+
+    <hr>
+
+    <div class="tk-content">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+
+
+    <footer>
+        {# todo create footer #}
+    </footer>
+
+{% endblock %}

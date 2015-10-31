@@ -42,23 +42,6 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    filters:
-        cssrewrite:
-            apply_to: "\.css$"
-        sass:
-            apply_to: "\.sass$"
-        uglifyjs2:
-            bin: %kernel.root_dir%/Resources/node_modules/.bin/uglifyjs
-            apply_to: "\.js$"
-        uglifycss:
-            bin: %kernel.root_dir%/Resources/node_modules/.bin/uglifycss
-            apply_to: "\.css$"
-            #TODO check how to install autoprefixer
-
-    assets:
-        jquery:
-            inputs:
-                - %kernel.root_dir%/../vendor/components/jquery/jquery.js
 
 # Doctrine Configuration
 doctrine:

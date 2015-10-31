@@ -4,16 +4,12 @@
 <head>
     <meta charset="UTF-8"/>
     <title>{% block pageTitle %}timekipr{% endblock %}</title>
-
     {% block stylesheets %}
-        {% stylesheets 'bundles/app/css/timekipr.sass' %}
-        <link rel="stylesheet" href="{{ asset_url }}">
-        {% endstylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-custom.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/timekipr.css') }}">
     {% endblock %}
 
-    {% image '@AppBundle/Resources/public/img/favicon.ico' %}
-    <link rel="icon" type="image/x-icon" href="{{ asset_url }}"/>
-    {% endimage %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}"/>
 </head>
 
 <body>
@@ -21,9 +17,8 @@
 {% block body %}{% endblock %}
 
 {% block javascripts %}
-    {% javascripts '@jquery' 'bundles/app/js/bootstrap.js' %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script src="{{ asset('js/jquery-2.1.4.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
 {% endblock %}
 </body>
 </html>

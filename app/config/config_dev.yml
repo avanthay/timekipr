@@ -42,10 +42,7 @@ monolog:
         #    level:  info
 
 assetic:
-    use_controller: false
-    filters:
-        uglifycss: ~
-        uglifyjs2: ~
+    use_controller: true
 
 #swiftmailer:
 #    delivery_address: me@example.com
