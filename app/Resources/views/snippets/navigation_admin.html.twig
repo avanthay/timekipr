@@ -1,0 +1,16 @@
+<nav>
+    <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" class="{% if app.request.get('_route') == 'app' %}active{% endif %}">
+            <a href="{{ path('app') }}">
+                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                <span class="hidden-sm hidden-xs"> {{ 'timekipr.record-worktime'|trans }}</span>
+            </a>
+        </li>
+        <li role="presentation" class="{% if app.request.get('_route') == 'employee' %}active{% endif %}">
+            <a href="{{ path('employee') }}">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <span class="hidden-sm hidden-xs"> {{ 'timekipr.manage-employee'|trans }}</span>
+            </a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,12 @@
+{% extends "::layout.html.twig" %}
+
+{% block pageContent %}
+    <div class="col-xs-2">
+        {% include ':snippets:navigation_admin.html.twig' %}
+    </div>
+    <div class="col-xs-10">
+        {% block contentContainer %}
+            {{ parent() }}
+        {% endblock %}
+    </div>
+{% endblock %}

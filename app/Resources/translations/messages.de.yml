@@ -1,2 +1,5 @@
 timekipr:
+    welcome: Willkommen
     login: Login
+    record-worktime: Arbeitszeit erfassen
+    manage-employee: Mitarbeitende verwalten

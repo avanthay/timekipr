@@ -3,7 +3,7 @@
 {% block body %}
     <header class="row">
         <div class="col-xs-4 col-sm-2 col-md-offset-2 col-md-2">
-            <a class="tk-logo-header" href="{{ path('homepage') }}">
+            <a class="tk-logo-header" href="{{ path('app') }}">
                 {% include ':snippets:logo.html.twig' %}
             </a>
         </div>
@@ -18,9 +18,26 @@
 
     <hr>
 
-    <div class="tk-content">
-        {% block content %}
+    <div class="row">
+        {% block pageContent %}
+            <div class="col-md-offset-2">
+                <div class="container tk-content">
+                    {% block contentContainer %}
 
+                        <h2>{% spaceless %}
+                                {% block contentTitle %}
+                                    {{ 'timekipr.welcome'|trans }}
+                                {% endblock %}
+                            {% endspaceless %}</h2>
+
+
+                        {% block content %}
+
+                        {% endblock %}
+
+                    {% endblock %}
+                </div>
+            </div>
         {% endblock %}
     </div>
 
