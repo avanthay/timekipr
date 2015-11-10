@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * Employee
@@ -29,31 +31,18 @@ class Employee extends AbstractEntity {
     /**
      * @var User
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", inversedBy="employee")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", inversedBy="employee", cascade={"persist", "remove"})
+     * @Valid()
+     * @NotNull()
      */
     private $user;
 
 
     /**
-     * Get firstname
-     *
-     * @return string
+     * @return string The last and first name of the employee separated by a comma.
      */
-    public function getFirstname() {
-        return $this->firstname;
-    }
-
-    /**
-     * Set firstname
-     *
-     * @param string $firstname
-     *
-     * @return Employee
-     */
-    public function setFirstname($firstname) {
-        $this->firstname = $firstname;
-
-        return $this;
+    public function __toString() {
+        return $this->getLastname() . ', ' . $this->getFirstname();
     }
 
     /**
@@ -79,11 +68,36 @@ class Employee extends AbstractEntity {
     }
 
     /**
+     * Get firstname
+     *
+     * @return string
+     */
+    public function getFirstname() {
+        return $this->firstname;
+    }
+
+    /**
+     * Set firstname
+     *
+     * @param string $firstname
+     *
+     * @return Employee
+     */
+    public function setFirstname($firstname) {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
      * Get user
      *
      * @return \AppBundle\Entity\User
      */
     public function getUser() {
+        if (!$this->user) {
+            $this->user = new User();
+        }
         return $this->user;
     }
 

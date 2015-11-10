@@ -31,23 +31,9 @@ abstract class AbstractEntity {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedAt", type="datetime")
+     * @ORM\Column(name="updatedAt", type="datetime", nullable=true)
      */
     protected $updatedAt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="createdBy", type="string", length=255)
-     */
-    protected $createdBy;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="updatedBy", type="string", length=255)
-     */
-    protected $updatedBy;
 
     /**
      * @ORM\PrePersist()
@@ -61,6 +47,13 @@ abstract class AbstractEntity {
      */
     public function preUpdate() {
         $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @return string   A string representation of the object.
+     */
+    public function __toString() {
+        return strtolower((new \ReflectionClass($this))->getShortName() . '-' . $this->getId());
     }
 
 
@@ -117,47 +110,4 @@ abstract class AbstractEntity {
         return $this;
     }
 
-    /**
-     * Get createdBy
-     *
-     * @return string
-     */
-    public function getCreatedBy() {
-        return $this->createdBy;
-    }
-
-    /**
-     * Set createdBy
-     *
-     * @param string $createdBy
-     *
-     * @return AbstractEntity
-     */
-    public function setCreatedBy($createdBy) {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedBy
-     *
-     * @return string
-     */
-    public function getUpdatedBy() {
-        return $this->updatedBy;
-    }
-
-    /**
-     * Set updatedBy
-     *
-     * @param string $updatedBy
-     *
-     * @return AbstractEntity
-     */
-    public function setUpdatedBy($updatedBy) {
-        $this->updatedBy = $updatedBy;
-
-        return $this;
-    }
 }
