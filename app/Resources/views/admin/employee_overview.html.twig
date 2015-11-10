@@ -1,11 +1,27 @@
 {% extends ":admin:layout_admin.html.twig" %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/watable.css') }}">
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/jquery.watable.js') }}"></script>
+{% endblock %}
+
+
 {% block contentTitle %}
     {{ 'timekipr.manage-employee'|trans }}
 {% endblock %}
 
 {% block content %}
     {# todo add content #}
-    <p>in construction</p>
+    {% set actionSnippet %}
+        <a href="#"><span class="tk-edit glyphicon glyphicon-edit text-info" title="{{ 'timekipr.edit-employee'|trans }}" aria-hidden="true"></span></a>
+        <a href="#"><span class="tk-delete glyphicon glyphicon-trash text-danger" title="{{ 'timekipr.delete-employee'|trans }}" aria-hidden="true"></span></a>
+    {% endset %}
+    <div id="tk-employee-table" data-tk-employees="{{ employees|json_encode }}" data-tk-action="{{ actionSnippet|e }}"></div>
 {% endblock %}
 

@@ -20,9 +20,9 @@
 
     <div class="row">
         {% block pageContent %}
-            <div class="col-md-offset-2">
-                <div class="container tk-content">
-                    {% block contentContainer %}
+            <div class="col-xs-offset-2 col-xs-10">
+                {% block contentContainer %}
+                    <div class="tk-content">
 
                         <h2>{% spaceless %}
                                 {% block contentTitle %}
@@ -35,8 +35,8 @@
 
                         {% endblock %}
 
-                    {% endblock %}
-                </div>
+                    </div>
+                {% endblock %}
             </div>
         {% endblock %}
     </div>
