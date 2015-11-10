@@ -3,3 +3,16 @@ timekipr:
     login: Login
     record-worktime: Arbeitszeit erfassen
     manage-employee: Mitarbeitende verwalten
+    add-employee: Neuer Mitarbeitende hinzufügen
+    edit-employee: Mitarbeitende editieren
+    delete-employee: Mitarbeitende löschen
+
+    password:
+        forgotten: 'Passwort vergessen?'
+message:
+    update:
+        successful: 'Das Objekt wurde erfolgreich aktualisiert.'
+    create:
+        successful: 'Das Objekt wurde erfolgreich erstellt.'
+    delete:
+        successful: 'Das Objekt wurde erfolgreich geslöcht.'

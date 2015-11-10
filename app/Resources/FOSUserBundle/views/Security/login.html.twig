@@ -47,6 +47,12 @@
                         <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <a href="{{ url('fos_user_resetting_request') }}">{{ 'timekipr.password.forgotten'|trans }}</a>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

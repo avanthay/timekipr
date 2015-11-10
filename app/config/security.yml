@@ -13,6 +13,8 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
+        ROLE_TEAM_LEADER: ROLE_USER
+        ROLE_MANAGER: ROLE_TEAM_LEADER, ROLE_ADMIN
         ROLE_ADMIN: ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
@@ -40,7 +42,9 @@ security:
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#        this route is not active
+#        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin, role: ROLE_MANAGER }
+        - { path: ^/admin/employee, role: ROLE_TEAM_LEADER }
         - { path: ^/, role: ROLE_USER }
