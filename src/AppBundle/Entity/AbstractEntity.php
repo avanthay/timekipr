@@ -53,7 +53,8 @@ abstract class AbstractEntity {
      * @return string   A string representation of the object.
      */
     public function __toString() {
-        return strtolower((new \ReflectionClass($this))->getShortName() . '-' . $this->getId());
+        $classShortName = strtolower((new \ReflectionClass($this))->getShortName());
+        return implode('-', array_filter(array($classShortName, $this->id)));
     }
 
 

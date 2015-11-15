@@ -37,12 +37,20 @@ class Employee extends AbstractEntity {
      */
     private $user;
 
+    public function __construct($firstname = null, $lastname = null) {
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+    }
+
 
     /**
      * @return string The last and first name of the employee separated by a comma.
      */
     public function __toString() {
-        return $this->getLastname() . ', ' . $this->getFirstname();
+        if ($this->lastname || $this->firstname) {
+            return implode(', ', array_filter(array($this->firstname, $this->lastname)));
+        }
+        return implode('-', array_filter(array('Employee', $this->id)));
     }
 
     /**
