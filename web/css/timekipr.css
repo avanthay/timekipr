@@ -25,7 +25,12 @@
 #tk-employee-table .watable.table {
   width: 100%;
 }
-
 #tk-employee-table .watable .glyphicon {
   opacity: initial;
+}
+
+#tk-alert-container {
+  position: fixed;
+  margin-top: 25px;
+  z-index: 1000;
 }

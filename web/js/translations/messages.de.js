@@ -7,5 +7,6 @@ Translator.messages.de = {
     email: 'E-Mail',
     teamLeader: 'Teamleiter',
     manager: 'Geschäftsführer',
-    action: 'Aktion'
+    action: 'Aktion',
+    operationSuccessful: 'Die Operation war erfolgreich.'
 };

@@ -1,18 +1,33 @@
-timekipr:
-    welcome: Willkommen
-    login: Login
+action:
     record-worktime: Arbeitszeit erfassen
     manage-employee: Mitarbeitende verwalten
     add-employee: Neuer Mitarbeitende hinzufügen
     edit-employee: Mitarbeitende editieren
     delete-employee: Mitarbeitende löschen
 
-    password:
-        forgotten: 'Passwort vergessen?'
 message:
+    welcome: Willkommen
     update:
-        successful: 'Das Objekt wurde erfolgreich aktualisiert.'
+        successful: Das Objekt wurde erfolgreich aktualisiert.
     create:
-        successful: 'Das Objekt wurde erfolgreich erstellt.'
+        successful: Das Objekt wurde erfolgreich erstellt.
     delete:
-        successful: 'Das Objekt wurde erfolgreich geslöcht.'
+        successful: Das Objekt wurde erfolgreich geslöcht.
+    delete-employee:
+        are-you-sure: Sind Sie sicher, dass sie diesen Mitarbeiter, seinen Zugang und seine verknüpfte Arbeitszeiten endgültig löschen möchten?
+
+label:
+    confirm: Bestätigen
+    cancel: Abbrechen
+    save: Speichern
+    delete: Löschen
+    login: Login
+    forgot-password: Passwort vergessen?
+    close: Schliessen
+
+property:
+    firstname: Vorname
+    lastname: Nachname
+    email: E-Mail
+    isTeamLeader: Teamleiter
+    isManager: Manager

@@ -13,15 +13,108 @@
 
 
 {% block contentTitle %}
-    {{ 'timekipr.manage-employee'|trans }}
+    {{ 'action.manage-employee'|trans }}
 {% endblock %}
 
+
+{% set actionSnippet %}
+    <a href="#tk-modal-edit" data-toggle="modal">
+        <span class="tk-edit glyphicon glyphicon-edit text-info" title="{{ 'action.edit-employee'|trans }}" aria-hidden="true"></span>
+    </a>
+    <a href="#tk-modal-confirm" data-toggle="modal">
+        <span class="tk-delete glyphicon glyphicon-trash text-danger" title="{{ 'action.delete-employee'|trans }}" aria-hidden="true"></span>
+    </a>
+{% endset %}
+
 {% block content %}
-    {# todo add content #}
-    {% set actionSnippet %}
-        <a href="#"><span class="tk-edit glyphicon glyphicon-edit text-info" title="{{ 'timekipr.edit-employee'|trans }}" aria-hidden="true"></span></a>
-        <a href="#"><span class="tk-delete glyphicon glyphicon-trash text-danger" title="{{ 'timekipr.delete-employee'|trans }}" aria-hidden="true"></span></a>
-    {% endset %}
+    <p class="text-right">
+        <a href="#tk-modal-edit" data-toggle="modal" id="tk-employee-create">{{ 'action.add-employee'|trans }}
+            <span class="tk-delete glyphicon glyphicon-plus-sign text-success" title="{{ 'action.delete-employee'|trans }}" aria-hidden="true"></span>
+        </a>
+    </p>
     <div id="tk-employee-table" data-tk-employees="{{ employees|json_encode }}" data-tk-action="{{ actionSnippet|e }}"></div>
 {% endblock %}
 
+
+{% block beforeBody %}
+    {# delete confirmation modal #}
+    <div class="modal fade" id="tk-modal-confirm" tabindex="-1" role="dialog" aria-labelledby="tk-modal-confirm-label" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header panel-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="tk-modal-confirm-label">{{ 'action.delete-employee'|trans }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{ 'message.delete-employee.are-you-sure'|trans }}</p>
+
+                    <p id="tk-modal-confirm-employee">Fritz Müller, fritz.müller@test.ch</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'label.cancel'|trans }}</button>
+                    <button type="button" class="btn btn-primary" id="tk-modal-confirm-button">{{ 'label.delete'|trans }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# edit employee modal #}
+    <div class="modal fade" id="tk-modal-edit" tabindex="-1" role="dialog" aria-labelledby="tk-modal-edit-label" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header panel-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="tk-modal-edit-label" data-tk-label-edit="{{ 'action.edit-employee'|trans }}"
+                        data-tk-label-create="{{ 'action.add-employee'|trans }}">{{ 'action.edit-employee'|trans }}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'property.firstname'|trans }}</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="tk-modal-edit-firstname" placeholder="{{ 'property.firstname'|trans }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'property.lastname'|trans }}</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="tk-modal-edit-lastname" placeholder="{{ 'property.lastname'|trans }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'property.email'|trans }}</label>
+
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="tk-modal-edit-email" placeholder="{{ 'property.email'|trans }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="tk-modal-edit-isTeamLeader"> {{ 'property.isTeamLeader'|trans }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="tk-modal-edit-isManager"> {{ 'property.isManager'|trans }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'label.cancel'|trans }}</button>
+                    <button type="button" class="btn btn-primary" id="tk-modal-edit-button">{{ 'label.save'|trans }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

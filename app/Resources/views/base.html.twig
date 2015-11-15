@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block pageTitle %}timekipr{% endblock %}</title>
+    <title>{% block documentTitle %}timekipr{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/bootstrap-custom.css') }}">
         <link rel="stylesheet" href="{{ asset('css/timekipr.css') }}">
@@ -15,6 +15,14 @@
 
 <body>
 <div class="container">
+    {% set alertSnippet %}
+        <div class="alert alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="{{ 'label.close'|trans }}"><span aria-hidden="true">&times;</span></button>
+            <span class="tk-alert-text"></span>
+        </div>
+    {% endset %}
+    <div id="tk-alert-container" class="container" data-tk-alert="{{ alertSnippet|e }}"></div>
+    {% block beforeBody %}{% endblock %}
     {% block body %}{% endblock %}
 </div>
 
