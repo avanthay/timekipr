@@ -1,0 +1,55 @@
+{% extends '::layout.html.twig' %}
+
+{% block contentTitle %}
+    {{ 'action.record-worktime'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="form-inline">
+        <div class="form-group">
+            <label for="tk-time-from" class="{% if timerRunning %}tk-disabled {% endif %} tk-timer-disabled">{{ 'label.time-from'|trans }}</label>
+            <input id="tk-time-from" name="tk-time-from" type="time" class="form-control tk-timer-disabled" placeholder="{{ 'now'|date('H:i') }}" required
+                   {% if timerRunning %}disabled{% endif %}
+                   value="{{ (timerRunning ? timeEntry.startTime : 'now')|date('H:i') }}">
+        </div>
+        <div class="form-group">
+            <label for="tk-time-to">{{ 'label.time-to'|trans|lower }}</label>
+            <input id="tk-time-to" name="tk-time-to" type="time" class="form-control" placeholder="{{ 'now'|date('H:i') }}" required
+                   value="{{ (timerRunning ? 'now'|date('H:i') : '' ) }}">
+        </div>
+        <div class="form-group">
+            <label for="tk-for-date" class="{% if timerRunning %}tk-disabled {% endif %} tk-timer-disabled">{{ 'label.for-date'|trans|lower }}</label>
+            <input id="tk-for-date" name="tk-for-date" type="date" class="form-control tk-timer-disabled" placeholder="{{ 'now'|date('Y-m-d') }}" required
+                   {% if timerRunning %}disabled{% endif %}
+                   value="{{ (timerRunning ? timeEntry.date : 'now')|date('Y-m-d') }}">
+        </div>
+        <div class="form-group {% if timerRunning %}hidden{% endif %} tk-timer-hidden">
+            <button id="tk-time-entry-save" type="button" class="btn btn-default btn-success" aria-label="{{ 'label.save'|trans }}" title="{{ 'label.save'|trans }}">
+                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div class="form-group {% if timerRunning %}hidden{% endif %} tk-timer-hidden">
+            <p class="form-control-static text-uppercase">{{ 'label.or'|trans }}</p>
+        </div>
+        <div class="form-group {% if timerRunning %}hidden{% endif %} tk-timer-hidden">
+            <button id="tk-timer-start" type="button" class="btn btn-info" aria-label="{{ 'label.timer-start'|trans }}" title="{{ 'label.timer-start'|trans }}">
+                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div class="form-group {% if not timerRunning %}hidden{% endif %} tk-timer-visible">
+            <button id="tk-timer-stop" type="button" class="btn btn-danger" aria-label="{{ 'label.timer-stop'|trans }}" title="{{ 'label.timer-stop'|trans }}"
+                    data-tk-time-entry-id="{{ timerRunning ? timeEntry.id : '' }}">
+                <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="h2 col-xs-9">{{ 'action.recorded-worktime'|trans }}</div>
+        <div class="h2 col-xs-3 text-right"><a class="btn btn-default" href="{{ path('report') }}">{{ 'label.to-report'|trans }}</a></div>
+    </div>
+
+    <div id="tk-recorded-worktime-container">
+        {% include ':snippets:recorded_worktime.html.twig' %}
+    </div>
+{% endblock %}

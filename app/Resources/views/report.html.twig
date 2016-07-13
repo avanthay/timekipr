@@ -1,0 +1,52 @@
+{% macro formatTimeInterval(seconds) %}
+    {{ (seconds/3600)|round(0, 'floor') ~ ':' ~ seconds%3600/60 }}
+{% endmacro %}
+{% extends "::layout.html.twig" %}
+
+{% import _self as func %}
+
+{% block contentTitle %}
+    {{ 'action.report'|trans }}
+{% endblock %}
+
+
+{% block content %}
+
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="tk-from-date">{{ 'label.time-from'|trans }}</label>
+            <input id="tk-from-date" name="fromDate" type="date" class="form-control" placeholder="{{ 'now'|date('Y-m-d') }}" required value="{{ fromDate|date('Y-m-d') }}">
+        </div>
+        <div class="form-group">
+            <label for="tk-to-date">{{ 'label.time-to'|trans|lower }}</label>
+            <input id="tk-to-date" name="toDate" type="date" class="form-control" placeholder="{{ 'now'|date('Y-m-d') }}" required value="{{ toDate|date('Y-m-d') }}">
+        </div>
+        <div class="form-group">
+            <label for="bla" class="btn btn-default btn-info" aria-label="{{ 'label.send'|trans }}" title="{{ 'label.send'|trans }}">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </label>
+            <input class="hidden" id="bla" type="submit">
+        </div>
+    </form>
+
+    <div class="row">
+        <span class="h2 col-xs-9">{{ 'message.worktime-period'|trans({'%from%': fromDate|date('d.m'), '%to%': toDate|date('d.m.Y')}) }}</span>
+        <span class="h2 text-right text-danger col-xs-3">{{ 'label.total'|trans }} {{ func.formatTimeInterval(timeEntriesGroupedByDate.total) }}</span>
+    </div>
+    {% for date, timeEntries in timeEntriesGroupedByDate.dates %}
+        <div class="row">
+            <strong class="col-xs-3">{{ date|date('l, d.m.y') }}</strong>
+            <span class="col-xs-7">
+                {% set dayTotal = 0 %}
+                {% for timeEntry in timeEntries %}
+                    {{ timeEntry.startTime|date('H:i') ~ '-' ~ timeEntry.endTime|date('H:i') ~ (loop.last ? '' : ', ') }}
+                    {% set dayTotal = dayTotal + (timeEntry.endTime|date('U') - timeEntry.startTime|date('U')) %}
+                {% endfor %}
+            </span>
+            <span class="text-danger col-xs-2 text-right">
+                {{ (dayTotal/3600)|round(0, 'floor') ~ ':' ~ dayTotal%3600/60 }}
+            </span>
+        </div>
+    {% endfor %}
+
+{% endblock %}

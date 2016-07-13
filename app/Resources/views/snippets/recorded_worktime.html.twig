@@ -1,0 +1,31 @@
+{% macro formatTimeInterval(seconds) %}
+    {{ (seconds/3600)|round(0, 'floor') ~ ':' ~ seconds%3600/60 }}
+{% endmacro %}
+
+{% import _self as func %}
+
+{% if timeEntriesGroupedByDate is defined %}
+
+    {% for week, params in timeEntriesGroupedByDate %}
+        <div class="row">
+            <span class="col-xs-3 h4">{{ week }}</span>
+            <span class="col-xs-9 h4 text-danger text-right">{{ func.formatTimeInterval(params.total) }}</span>
+        </div>
+        {% for date, timeEntries in params.dates %}
+            <div class="row">
+                <strong class="col-xs-3">{{ date|date('l, d.m.y') }}</strong>
+            <span class="col-xs-7">
+                {% set dayTotal = 0 %}
+                {% for timeEntry in timeEntries %}
+                    {{ timeEntry.startTime|date('H:i') ~ '-' ~ timeEntry.endTime|date('H:i') ~ (loop.last ? '' : ', ') }}
+                    {% set dayTotal = dayTotal + (timeEntry.endTime|date('U') - timeEntry.startTime|date('U')) %}
+                {% endfor %}
+            </span>
+            <span class="text-danger col-xs-2 text-right">
+                {{ (dayTotal/3600)|round(0, 'floor') ~ ':' ~ dayTotal%3600/60 }}
+            </span>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+{% endif %}
