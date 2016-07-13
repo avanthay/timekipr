@@ -1,7 +1,7 @@
 <nav>
     <ul class="nav nav-pills nav-stacked">
-        <li role="presentation" class="{% if app.request.get('_route') == 'app' %}active{% endif %}">
-            <a href="{{ path('app') }}">
+        <li role="presentation" class="{% if app.request.get('_route') == 'time' %}active{% endif %}">
+            <a href="{{ path('time') }}">
                 <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                 <span class="hidden-sm hidden-xs"> {{ 'action.record-worktime'|trans }}</span>
             </a>

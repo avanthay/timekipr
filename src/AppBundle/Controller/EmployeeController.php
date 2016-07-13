@@ -25,7 +25,7 @@ class EmployeeController extends Controller {
     /**
      * @Route("/admin/employee", name="employee")
      */
-    public function adminEmployeeAction() {
+    public function indexAction() {
         return $this->render(':admin:employee_overview.html.twig', array('employees' => $this->serializeEmployees()));
     }
 
@@ -61,6 +61,7 @@ class EmployeeController extends Controller {
     }
 
     /**
+     * todo refactor: one function for each method
      * @Route("/data/employee", name="data_employees")
      */
     public function employeesAction(Request $request) {
@@ -112,6 +113,7 @@ class EmployeeController extends Controller {
     }
 
     /**
+     * todo refactor: one function for each method
      * @Route("/data/employee/{id}", name="data_employee")
      */
     public function employeeAction(Request $request, Employee $employee) {

@@ -34,3 +34,7 @@
   margin-top: 25px;
   z-index: 1000;
 }
+
+label.tk-disabled {
+  color: gray;
+}

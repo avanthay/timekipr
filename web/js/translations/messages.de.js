@@ -8,5 +8,6 @@ Translator.messages.de = {
     teamLeader: 'Teamleiter',
     manager: 'Geschäftsführer',
     action: 'Aktion',
-    operationSuccessful: 'Die Operation war erfolgreich.'
+    operationSuccessful: 'Die Operation war erfolgreich.',
+    invalidFormField: 'Das Formular ist nicht gültig.'
 };

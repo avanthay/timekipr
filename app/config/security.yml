@@ -47,4 +47,5 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, role: ROLE_MANAGER }
         - { path: ^/admin/employee, role: ROLE_TEAM_LEADER }
+        - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, role: ROLE_USER }

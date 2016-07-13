@@ -3,7 +3,7 @@
 {% block body %}
     <header class="row">
         <div class="col-xs-4 col-sm-2 col-md-offset-2 col-md-2">
-            <a class="tk-logo-header" href="{{ path('app') }}">
+            <a class="tk-logo-header" href="{{ is_granted('ROLE_USER') ? path('time') : path('home') }}">
                 {% include ':snippets:logo.html.twig' %}
             </a>
         </div>

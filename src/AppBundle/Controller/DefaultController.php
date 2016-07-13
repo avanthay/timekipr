@@ -4,16 +4,16 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class DefaultController extends Controller {
 
     /**
-     * @Route("/", name="app")
+     * @Route("/", name="home")
      */
     public function indexAction() {
-        // replace this example code with whatever you need
-        return $this->render('::index.html.twig');
+        /* todo render nice welcome page with informations about the app */
+        return new RedirectResponse($this->get('router')->generate('time'));
     }
-
 
 }

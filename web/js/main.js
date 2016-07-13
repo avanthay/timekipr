@@ -85,8 +85,113 @@ APP.showMessage = function(message, error) {
 
 /* initialize the app */
 APP.init = function() {
+    this.time.init();
+    /* todo check if current page is admin */
     this.admin.init();
 };
+
+APP.time = (function() {
+    var init = function() {
+        registerListeners();
+        $('.tk-hide.hidden').hide().removeClass('hidden').addClass('tk-hidden');
+    };
+    var operationConfirmed = function(response) {
+        APP.showMessage(response.message || Translator.trans('operationSuccessful'));
+        if (response && response.data.endTime) {
+            updateRecordedWorktime();
+            toggleTimer(true);
+            resetFields();
+            $('#tk-timer-stop').removeData('tkTimeEntryId');
+            return;
+        }
+        $('#tk-timer-stop').data('tkTimeEntryId', response.data.id);
+        toggleTimer(false);
+    };
+    var updateRecordedWorktime = function() {
+        action.getTimeEntries(function(resp) {
+            $('#tk-recorded-worktime-container').html(resp.html);
+        }, true);
+    }
+    var toggleTimer = function(show) {
+        show = !!show;
+        $('.tk-timer-disabled').toggleClass('tk-disabled', !show).filter('input').attr('disabled', !show);
+        $('.tk-timer-hidden').toggleClass('hidden', !show);
+        $('.tk-timer-visible').toggleClass('hidden', show);
+    };
+    var resetFields = function() {
+        $('#tk-time-from, #tk-time-to, #tk-for-date').val(null);
+    };
+    var registerListeners = function() {
+        $('#tk-time-entry-save').click(saveTimeEntry);
+        $('#tk-timer-start').click(startTimer);
+        $('#tk-timer-stop').click(stopTimer);
+    };
+    var saveTimeEntry = function() {
+        try {
+            var startTime = getValidatedFormValue($('#tk-time-from'));
+            var endTime = getValidatedFormValue($('#tk-time-to'));
+            var date = getValidatedFormValue($('#tk-for-date'));
+        } catch (e) {
+            APP.showMessage(e, true);
+        }
+        action.createTimeEntry({startTime: startTime, endTime: endTime, date: date}, operationConfirmed);
+    };
+    var startTimer = function() {
+        try {
+            var startTime = getValidatedFormValue($('#tk-time-from'));
+            $('#tk-time-to').closest('.form-group').removeClass('has-error');
+            var date = getValidatedFormValue($('#tk-for-date'));
+        } catch (e) {
+            APP.showMessage(e, true);
+        }
+        action.createTimeEntry({startTime: startTime, date: date}, operationConfirmed);
+    };
+    var stopTimer = function() {
+        try {
+            var endTime = getValidatedFormValue($('#tk-time-to'));
+            action.updateTimeEntry({id: $(this).data('tkTimeEntryId'), endTime: endTime}, operationConfirmed);
+        } catch (err) {
+            APP.showMessage(err, true);
+        }
+    };
+    var getValidatedFormValue = function(field) {
+        field.closest('.form-group').removeClass('has-error');
+        if (!field[0].checkValidity()) {
+            field.closest('.form-group').addClass('has-error');
+            throw Translator.trans('invalidFormField');
+        }
+        return field.val();
+    };
+    var action = {
+        deleteTimeEntry: function(id, success) {
+            $.ajax({
+                url: '/data/time/' + id,
+                type: 'DELETE',
+                success: success
+            });
+        },
+        createTimeEntry: function(timeEntry, success) {
+            $.ajax({
+                url: '/data/time',
+                type: 'POST',
+                data: timeEntry,
+                success: success
+            })
+        },
+        updateTimeEntry: function(timeEntry, success) {
+            $.ajax({
+                url: '/data/time/' + timeEntry.id,
+                type: 'PUT',
+                data: timeEntry,
+                success: success
+            })
+        },
+        getTimeEntries: function(success, html) {
+            $.get('/data/time', {html: html || 0}, success);
+        }
+    };
+    return {init: init};
+})();
 
 /* admin namespace */
 APP.admin = {};
@@ -96,7 +201,7 @@ APP.admin.init = function() {
 
 /* admin.employee namespace */
 APP.admin.employee = (function() {
-    this.init = function() {
+    var init = function() {
         initializeTable();
         registerListeners();
     };
@@ -247,7 +352,7 @@ APP.admin.employee = (function() {
             $.get('/data/employee', success);
         }
     };
-    return this;
+    return {init: init};
 })();
 
 /* start the app on document ready */

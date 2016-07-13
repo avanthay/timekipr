@@ -1,9 +1,12 @@
 action:
     record-worktime: Arbeitszeit erfassen
+    recorded-worktime: Erfasste Arbeitzeiten
     manage-employee: Mitarbeitende verwalten
     add-employee: Neuer Mitarbeitende hinzufügen
     edit-employee: Mitarbeitende editieren
     delete-employee: Mitarbeitende löschen
+    go-to-application: Zur Applikation...
+    report: Arbeitszeitrapporte
 
 message:
     welcome: Willkommen
@@ -15,6 +18,7 @@ message:
         successful: Das Objekt wurde erfolgreich geslöcht.
     delete-employee:
         are-you-sure: Sind Sie sicher, dass sie diesen Mitarbeiter, seinen Zugang und seine verknüpfte Arbeitszeiten endgültig löschen möchten?
+    worktime-period: Arbeitszeiten vom %from% bis %to%
 
 label:
     confirm: Bestätigen
@@ -24,6 +28,16 @@ label:
     login: Login
     forgot-password: Passwort vergessen?
     close: Schliessen
+    from: Von
+    time-to: Bis
+    time-from: Von
+    for-date: Am
+    or: Oder
+    timer-start: Timer starten
+    timer-stop: Timer stoppen
+    total: Total
+    send: Senden
+    to-report: Zum Rapport
 
 property:
     firstname: Vorname
